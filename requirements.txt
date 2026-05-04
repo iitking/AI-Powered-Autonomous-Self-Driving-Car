@@ -1,0 +1,21 @@
+# Autonomous Self-Driving Car - Python Dependencies
+
+# Core Python libraries (runs out-of-the-box with standard library fallback)
+# For full computer vision and deep learning performance:
+numpy>=1.22.0
+opencv-python>=4.7.0.72
+
+# Deep Learning Object Detection (YOLOv8 / YOLOv11)
+ultralytics>=8.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Hardware serial communication (Raspberry Pi / Jetson to Arduino/ESP32)
+pyserial>=3.5
+
+# Real-time Telemetry Dashboard (Optional alternative to built-in web cockpit)
+streamlit>=1.25.0
+
+# Scientific computing & control simulation
+scipy>=1.9.0
+matplotlib>=3.6.0

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autonomous-self-driving-car"
+version = "1.0.0"
+authors = [
+  { name="Nivesh Kumar Meena", email="nivesh@example.com" },
+]
+description = "AI-Powered Autonomous Vehicle with Real-Time Object Detection, Lane Following and Adaptive Path Planning"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Robotics",
+]
+
+[project.scripts]
+autocar-sim = "scripts.run_simulation:main"
+autocar-vehicle = "scripts.run_vehicle:main"
+autocar-dashboard = "scripts.run_dashboard:main"
