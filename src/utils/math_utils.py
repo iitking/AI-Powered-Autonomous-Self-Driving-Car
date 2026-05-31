@@ -202,3 +202,5 @@ class LowPassFilter:
 
     def reset(self, value: float = 0.0):
         self.value = value
+
+# Optimized vectorized clamping helpers
