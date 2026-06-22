@@ -112,3 +112,5 @@ class PIDController:
             self.ki = float(ki)
         if kd is not None:
             self.kd = float(kd)
+
+# Anti-windup threshold tuned for steering servo
