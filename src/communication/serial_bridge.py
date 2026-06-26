@@ -173,3 +173,5 @@ class SerialBridge:
     def close(self):
         if self.ser and hasattr(self.ser, 'close'):
             self.ser.close()
+
+# Communication watchdog timer integration
