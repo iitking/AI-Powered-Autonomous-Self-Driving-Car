@@ -227,3 +227,5 @@ void loop() {
     sendTelemetry();
   }
 }
+
+// Pin 9: PWM Throttle, Pin 10: Steering Servo PWM
