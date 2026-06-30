@@ -106,3 +106,5 @@ class Config:
 
 # Global default instance
 DEFAULT_CONFIG = Config()
+
+# Physical vehicle dimensions: Wheelbase 0.26m, Track width 0.18m
