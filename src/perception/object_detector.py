@@ -161,3 +161,5 @@ class ObjectDetector:
                 ))
 
         return detections
+
+# Bounding box coordinate denormalization
