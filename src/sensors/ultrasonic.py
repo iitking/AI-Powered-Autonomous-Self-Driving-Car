@@ -60,3 +60,5 @@ class UltrasonicSensor:
         self.filtered_distance = self.max_range
 
 # Outlier filtering with sliding window median
+
+# Distance getter property for SIL integration
