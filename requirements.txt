@@ -19,3 +19,5 @@ streamlit>=1.25.0
 # Scientific computing & control simulation
 scipy>=1.9.0
 matplotlib>=3.6.0
+
+# Vision pipeline validated against Python 3.10+
