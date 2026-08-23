@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Autonomous Vehicle Cockpit</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="top-nav">
+      <div class="brand">
+        <span class="icon">🚗</span>
+        <div>
+          <h1>Autonomous Vehicle AI Cockpit</h1>
+          <p class="subtitle">Perception • Decision • Path Planning • PID Control • Sensor Fusion</p>
+        </div>
+      </div>
+      <div class="status-ribbon">
+        <div class="badge" id="mode-badge">AUTONOMOUS</div>
+        <div class="badge state-badge" id="state-badge">INITIALIZING</div>
+        <div class="stat-pill"><span class="label">LAP</span> <span id="lap-val" class="val">0</span></div>
+        <div class="stat-pill"><span class="label">TIME</span> <span id="time-val" class="val">0.0s</span></div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="grid-layout">
+      <!-- Left Column: 2D Simulation Canvas -->
+      <section class="card sim-card">
+        <div class="card-header">
+          <h2>🗺️ 2D Track Simulation & LiDAR Raycast</h2>
+          <div class="card-actions">
+            <button id="btn-reset-view" class="btn btn-secondary btn-sm">Center View</button>
+            <button id="btn-toggle-rays" class="btn btn-secondary btn-sm">Toggle LiDAR</button>
+          </div>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="trackCanvas" width="800" height="520"></canvas>
+          <div id="estop-banner" class="estop-banner hidden">⚠️ EMERGENCY BRAKE ACTIVATED</div>
+        </div>
+        <div class="legend">
+          <span><span class="dot car-dot"></span> Vehicle</span>
+          <span><span class="dot traffic-dot"></span> NPC Traffic</span>
+          <span><span class="dot ped-dot"></span> Pedestrian</span>
+          <span><span class="dot lane-dot"></span> Lane Center</span>
+          <span><span class="dot lidar-dot"></span> LiDAR Beams</span>
+          <span><span class="dot obs-dot"></span> Obstacles</span>
+          <span><span class="dot light-dot"></span> Traffic Signals</span>
+        </div>
+      </section>
+
+      <!-- Right Column: First-Person Perception & Telemetry -->
+      <aside class="right-column">
+        <!-- Windshield Camera View -->
+        <div class="card cam-card">
+          <div class="card-header">
+            <h3>👁️ Camera Perception & YOLO Detection</h3>
+            <span class="fps-tag" id="fps-counter">30 FPS</span>
+          </div>
+          <div class="cam-wrapper">
+            <canvas id="camCanvas" width="400" height="220"></canvas>
+          </div>
+          <div class="cam-meta">
+            <div class="meta-item"><span>Target Maneuver:</span> <strong id="maneuver-val">CRUISE</strong></div>
+            <div class="meta-item"><span>Traffic Signal:</span> <strong id="signal-val" class="signal-green">GREEN</strong></div>
+          </div>
+        </div>
+
+        <!-- Telemetry Gauges -->
+        <div class="card telemetry-card">
+          <div class="card-header">
+            <h3>📊 Live Vehicle Telemetry</h3>
+          </div>
+          <div class="gauge-grid">
+            <div class="gauge-box">
+              <span class="gauge-title">SPEED</span>
+              <div class="gauge-value" id="speed-val">0.0 <small>km/h</small></div>
+              <div class="bar-container">
+                <div class="bar-fill" id="speed-bar" style="width: 0%"></div>
+              </div>
+            </div>
+            <div class="gauge-box">
+              <span class="gauge-title">STEERING ANGLE</span>
+              <div class="gauge-value" id="steer-val">0.0°</div>
+              <div class="steer-meter">
+                <div class="steer-needle" id="steer-needle"></div>
+              </div>
+            </div>
+            <div class="gauge-box">
+              <span class="gauge-title">CROSS-TRACK ERROR</span>
+              <div class="gauge-value" id="cte-val">0.00 <small>m</small></div>
+              <div class="cte-meter">
+                <div class="cte-marker" id="cte-marker"></div>
+              </div>
+            </div>
+            <div class="gauge-box">
+              <span class="gauge-title">CURVATURE RADIUS</span>
+              <div class="gauge-value" id="curv-val">∞ <small>m</small></div>
+            </div>
+          </div>
+
+          <!-- PID Terms Breakdown -->
+          <div class="pid-breakdown">
+            <h4>PID Steering Decomposition</h4>
+            <div class="pid-tags">
+              <span>P: <strong id="pid-p">0.00</strong></span>
+              <span>I: <strong id="pid-i">0.00</strong></span>
+              <span>D: <strong id="pid-d">0.00</strong></span>
+              <span>Total Out: <strong id="pid-out">0.00</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Control Deck -->
+        <div class="card control-deck">
+          <div class="card-header">
+            <h3>🎮 Interactive Control Deck</h3>
+          </div>
+          <div class="btn-group-row">
+            <button id="btn-mode-toggle" class="btn btn-primary">Switch to Manual</button>
+            <button id="btn-toggle-light" class="btn btn-warning">🚦 Cycle Light</button>
+            <button id="btn-drop-obs" class="btn btn-danger">🚧 Drop Obstacle</button>
+            <button id="btn-toggle-traffic" class="btn btn-info">🚗 Lead Traffic Car</button>
+            <button id="btn-stall-traffic" class="btn btn-warning">🛑 Stall Traffic</button>
+            <button id="btn-pedestrian" class="btn btn-success">🚶 Pedestrian Cross</button>
+            <button id="btn-clear-obs" class="btn btn-secondary">Clear All</button>
+            <button id="btn-reset" class="btn btn-secondary">🔄 Reset</button>
+          </div>
+
+          <!-- Live PID Tuner -->
+          <details class="pid-tuner-drawer">
+            <summary>⚙️ Live PID Gains Tuning</summary>
+            <div class="tuner-inputs">
+              <div class="input-row">
+                <label>Kp (Proportional):</label>
+                <input type="number" id="input-kp" step="1.0" value="24.0">
+              </div>
+              <div class="input-row">
+                <label>Ki (Integral):</label>
+                <input type="number" id="input-ki" step="0.05" value="0.40">
+              </div>
+              <div class="input-row">
+                <label>Kd (Derivative):</label>
+                <input type="number" id="input-kd" step="0.2" value="3.00">
+              </div>
+              <button id="btn-apply-pid" class="btn btn-sm btn-primary">Apply Tuning</button>
+            </div>
+          </details>
+
+          <!-- Manual Key Instructions -->
+          <div id="manual-help" class="manual-help hidden">
+            <p>⌨️ Manual Driving Active: Use <strong>W/S</strong> for Throttle/Brake, <strong>A/D</strong> for Steering.</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
