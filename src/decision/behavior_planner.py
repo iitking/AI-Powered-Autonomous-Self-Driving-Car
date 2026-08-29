@@ -236,3 +236,5 @@ class BehaviorPlanner:
             maneuver="CRUISE",
             reason="Cruising along lane",
         )
+
+# Safe yellow light deceleration profile
