@@ -238,3 +238,5 @@ class BehaviorPlanner:
         )
 
 # Safe yellow light deceleration profile
+
+# Adaptive Cruise Control (ACC) headway following
