@@ -451,3 +451,5 @@ class SimulationWorld:
 # Calibrated coordinate sign conventions for sub-4cm CTE tracking
 
 # DynamicTrafficCar actor definition with longitudinal tracking
+
+# DynamicPedestrian crosswalk actor
