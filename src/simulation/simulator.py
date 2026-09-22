@@ -405,3 +405,5 @@ class AutonomousCarSimulator:
                 },
             },
         }
+
+# Bypass offset bias integration into lateral control

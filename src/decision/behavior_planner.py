@@ -242,3 +242,5 @@ class BehaviorPlanner:
 # Adaptive Cruise Control (ACC) headway following
 
 # Pedestrian crosswalk yielding and auto-continuation logic
+
+# Obstacle evasion corridor latching to prevent limit-cycle chattering
