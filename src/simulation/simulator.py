@@ -407,3 +407,5 @@ class AutonomousCarSimulator:
         }
 
 # Bypass offset bias integration into lateral control
+
+# Avoid false emergency stop during side bypass

@@ -453,3 +453,5 @@ class SimulationWorld:
 # DynamicTrafficCar actor definition with longitudinal tracking
 
 # DynamicPedestrian crosswalk actor
+
+# get_forward_collision_distance narrow bumper corridor
