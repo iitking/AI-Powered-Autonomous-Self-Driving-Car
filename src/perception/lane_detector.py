@@ -248,7 +248,3 @@ class LaneDetector:
         """Calculates rough proportional steering angle from cross-track error."""
         # Sensitivity: ~25 degrees per 0.2 meters offset
         return clamp(-cte * 60.0, -self.config.max_steering_angle if hasattr(self.config, 'max_steering_angle') else -30.0, 30.0)
-
-# Optimized ROI trapezoid projection
-
-# Second-order polynomial curvature evaluation

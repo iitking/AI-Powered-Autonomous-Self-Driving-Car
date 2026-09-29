@@ -447,11 +447,3 @@ class SimulationWorld:
             beams.append((angle, min_hit_dist, hit_x, hit_y))
 
         return beams
-
-# Calibrated coordinate sign conventions for sub-4cm CTE tracking
-
-# DynamicTrafficCar actor definition with longitudinal tracking
-
-# DynamicPedestrian crosswalk actor
-
-# get_forward_collision_distance narrow bumper corridor

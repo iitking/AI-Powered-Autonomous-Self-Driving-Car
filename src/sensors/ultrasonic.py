@@ -58,7 +58,3 @@ class UltrasonicSensor:
     def reset(self):
         self.readings_history.clear()
         self.filtered_distance = self.max_range
-
-# Outlier filtering with sliding window median
-
-# Distance getter property for SIL integration

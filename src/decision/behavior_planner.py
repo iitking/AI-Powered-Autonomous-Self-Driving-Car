@@ -236,11 +236,3 @@ class BehaviorPlanner:
             maneuver="CRUISE",
             reason="Cruising along lane",
         )
-
-# Safe yellow light deceleration profile
-
-# Adaptive Cruise Control (ACC) headway following
-
-# Pedestrian crosswalk yielding and auto-continuation logic
-
-# Obstacle evasion corridor latching to prevent limit-cycle chattering

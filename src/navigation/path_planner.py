@@ -170,5 +170,3 @@ class GridAStar:
             if self.grid[r][c] == 1:
                 return False
         return True
-
-# Spline knot continuity constraints

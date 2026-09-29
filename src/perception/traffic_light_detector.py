@@ -82,5 +82,3 @@ class TrafficLightDetector:
             distance_m=distance_m,
             stop_required=stop_req,
         )
-
-# Fallback state handling under high ambient glare
